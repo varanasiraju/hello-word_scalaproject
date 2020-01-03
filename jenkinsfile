@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Compile') {
+            steps {
+                echo "Compiling..."
+                sh "/usr/local/bin/sbt compile"
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo "Testing..."
+                sh "/usr/local/bin/sbt test"
+            }
+        }
+
+        stage('Package') {
+            steps {
+                echo "Packaging..."
+                sh "/usr/local/bin/sbt package"
+            }
+        }
+
+	Satge('scoveragereport') {
+	    steps {
+	    	echo "scoveragereport..."
+		sh label: '', script: 'sbt clean coverage test'
+		sh label: '', script: 'sbt coverageReport'
+	    }
+	}
+        
+	stage('scalasytle') { 
+	   steps { 
+	      echo "scalastyle_check_report..."
+	      sh label: '', script: 'sbt scalastyleGenerateConfig'
+	      sbt scalastyle
+	      cat 
+	     }
+	}
+    }
+}
