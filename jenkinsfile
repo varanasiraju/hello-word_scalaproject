@@ -24,7 +24,7 @@ pipeline {
             }
         }
 
-	stage('scoverge_reports') {
+	stage('scovergereports') {
 	   steps {
 	      echo "scoveragetest.."
 	      sh label: '', script: 'sbt clean coverage test'
@@ -32,7 +32,7 @@ pipeline {
 	    }
 	}
 
-	Stage('scoverge_publisher') {
+	Stage('scovergepublisher') {
 	  
 	   steps {
 	      ([$class: 'ScoveragePublisher', reportDir: 'target/scala-2.12/scoverage-report', reportFile: 'scoverage.xml'])
