@@ -26,7 +26,7 @@ pipeline {
 	    }
         }
 
-	stage('Package') {
+	stage('scoverage') {
             steps {
                 echo "scoverage..."
                 sh label: '', script: 'sbt clean coverage test'
