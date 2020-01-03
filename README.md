@@ -1,11 +1,37 @@
-A [Giter8][g8] template for a Hello World application, used in the [Getting Started with Scala guide](https://docs.scala-lang.org/getting-started-sbt-track/getting-started-with-scala-and-sbt-on-the-command-line.html).
+scoverage-samples
+==================
 
-Template license
-----------------
-Written in 2017-2019 by the Scala Center
+[![Build Status](https://travis-ci.org/scoverage/sbt-scoverage-samples.svg?branch=master)](https://travis-ci.org/scoverage/sbt-scoverage-samples)
 
-To the extent possible under law, the author(s) have dedicated all copyright and related
-and neighboring rights to this template to the public domain worldwide.
-This template is distributed without any warranty. See <http://creativecommons.org/publicdomain/zero/1.0/>.
+A sample program for demonstrating scoverage's code coverage. This sample is an akka based mock quote engine. Note: This project deliberately doesn't have 100% coverage for demonstration purposes.
 
-[g8]: http://www.foundweekends.org/giter8/
+It uses:
+
+* Akka 2.4.16
+* Scalatest for unit tests
+* Scoverage 1.5.0
+
+To run:
+
+```
+sbt clean coverage test coverageReport
+```
+
+## License
+```
+This software is licensed under the Apache 2 license, quoted below.
+
+Copyright 2014 Stephen Samuel
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not
+use this file except in compliance with the License. You may obtain a copy of
+the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+License for the specific language governing permissions and limitations under
+the License.
+```
