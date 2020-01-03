@@ -1,40 +1,27 @@
 pipeline {
     agent any
 
-    stages {
-
-        stage('Compile') {
-            steps {
-                echo "Compiling..."
-                sh label: '', script: 'sbt compile'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                echo "Testing..."
-                sh label: '', script: 'sbt test'
-            }
-        }
-
-        stage('Package') {
-            steps {
-                echo "Packaging..."
-                sh label: '', script: 'sbt package'
-	    }
-        }
-
-	stage('scoverage') {
-            steps {
-                echo "scoverage..."
-                sh label: '', script: 'sbt clean coverage test'
-                sh label: '', script: 'sbt coverageReport'
-            }
-        }
-
-	stage('scoverage') {
-            step([$class: 'ScoveragePublisher', reportDir: 'target/scala-2.12/scoverage-report', reportFile: 'scoverage.xml'])
-        }
+        stage('git-checkout'){
+        git 'https://github.com/scoverage/sbt-scoverage-samples.git'
+    }
+    
+    stage('compile-package'){
+        def sbtHome = tool name: '1.3.3', type: 'org.jvnet.hudson.plugins.SbtPluginBuilder$SbtInstallation'
+        sh "${sbtHome}/bin/sbt package"
 
     }
+    
+    stage('compile-package'){
+        def sbtHome = tool name: '1.3.3', type: 'org.jvnet.hudson.plugins.SbtPluginBuilder$SbtInstallation'
+        sh "${sbtHome}/bin/sbt clean coverage test"
+    
+        
+    }
+   stage('compile-package'){
+        def sbtHome = tool name: '1.3.3', type: 'org.jvnet.hudson.plugins.SbtPluginBuilder$SbtInstallation'
+        sh "${sbtHome}/bin/sbt coverageReport"
+    
+    step([$class: 'ScoveragePublisher', reportDir: 'target/scala-2.12/scoverage-report', reportFile: 'scoverage.xml'])   
+    }   
+
 }
