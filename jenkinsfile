@@ -27,16 +27,16 @@ pipeline {
 	Stage('scoveragereport') {
 	    steps {
 	    	echo "scoveragereport..."
-		sh label: '', script: 'sbt clean coverage test'
-		sh label: '', script: 'sbt coverageReport'
+		sh "/usr/local/bin/sbt clean coverage test"
+		sh "/usr/local/bin/sbt coverageReport"
 	    }
 	}
         
 	stage('scalasytle') { 
 	   steps { 
 	      echo "scalastyle_check_report..."
-	      sh label: '', script: 'sbt scalastyleGenerateConfig'
-	      sbt scalastyle
+	      sh "/usr/local/bin/sbt scalastyleGenerateConfig"
+	      sh "/usr/local/bin/sbt scalastyle"
 	   }
 	}
     }
