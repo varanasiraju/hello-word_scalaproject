@@ -24,7 +24,7 @@ pipeline {
             }
         }
 
-	Satge('scoveragereport') {
+	Stage('scoveragereport') {
 	    steps {
 	    	echo "scoveragereport..."
 		sh label: '', script: 'sbt clean coverage test'
@@ -37,8 +37,7 @@ pipeline {
 	      echo "scalastyle_check_report..."
 	      sh label: '', script: 'sbt scalastyleGenerateConfig'
 	      sbt scalastyle
-	      cat 
-	     }
+	   }
 	}
     }
 }
