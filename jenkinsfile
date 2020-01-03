@@ -21,8 +21,6 @@ pipeline {
             steps {
                 echo "Packaging..."
                 sh label: '', script: 'sbt package'
-		sh label: '', script: 'sbt clean coverage test'
-		sh label: '', script: 'sbt coverageReport'
 	    }
         }
 
@@ -33,5 +31,10 @@ pipeline {
                 sh label: '', script: 'sbt coverageReport'
             }
         }
+
+	stage('scoverage') {
+            step([$class: 'ScoveragePublisher', reportDir: 'target/scala-2.12/scoverage-report', reportFile: 'scoverage.xml'])
+        }
+
     }
 }
